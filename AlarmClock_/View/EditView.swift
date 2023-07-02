@@ -56,12 +56,21 @@ class EditView : UIView{
 
 extension EditView : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return self.array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! EditCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Edit") as! EditCell
         cell.textLabel?.text = array[indexPath.row]
+        
+        if indexPath.row == 3{
+            cell.accessoryView = UISwitch()
+            //switch 추가
+        }
+        else{
+            cell.accessoryType = .disclosureIndicator
+        }
+        
         return cell
     }
     
@@ -69,13 +78,16 @@ extension EditView : UITableViewDelegate, UITableViewDataSource{
         addSubview(tableview)
         self.tableview.dataSource = self
         self.tableview.delegate=self
+        tableview.register(EditCell.self, forCellReuseIdentifier: "Edit")
+        //cell 생성 코드에서 Identifier 통일시키기
         
         tableview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableview.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            tableview.topAnchor.constraint(equalTo: DatePicker.bottomAnchor, constant: 20),
-            tableview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 50),
-            tableview.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 50)])
+            tableview.topAnchor.constraint(equalTo: DatePicker.bottomAnchor, constant: -20),
+            tableview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            tableview.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            tableview.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -100)])
         
     }
 }
