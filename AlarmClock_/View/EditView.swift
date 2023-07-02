@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol AlarmDelegate: AnyObject {
+    func alarmDelegate(data: String)
+}
+
 class EditView : UIView{
     let array : [String] = ["반복", "레이블", "사운드", "다시 알림"]
     var tableview = UITableView(frame: .zero, style: .insetGrouped)
+    
+    var delegate : AlarmDelegate?
+    //Delegate를 위한 변수 생성 -> func 으로 data 넘기기 위함
     
   
     let DatePicker = UIDatePicker()
@@ -36,10 +43,13 @@ class EditView : UIView{
     @objc func datePickFunc(_:UIDatePicker){
      let dateFormat = DateFormatter()
         dateFormat.timeStyle = .short
-        let time = dateFormat.string(from: DatePicker.date)
+        let alarmtime = dateFormat.string(from: DatePicker.date)
+        
+        self.delegate?.alarmDelegate(data: alarmtime)
+        //delegate(AlarmDelegate)의 func 호출해 alarmtime을 넘김
+        //메인 뷰에 데이터 넘김
        
     }
-   
  
     
     override init(frame: CGRect) {
@@ -54,40 +64,6 @@ class EditView : UIView{
     
 }
 
-extension EditView : UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.array.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Edit") as! EditCell
-        cell.textLabel?.text = array[indexPath.row]
-        
-        if indexPath.row == 3{
-            cell.accessoryView = UISwitch()
-            //switch 추가
-        }
-        else{
-            cell.accessoryType = .disclosureIndicator
-        }
-        
-        return cell
-    }
-    
-    func setTableView(){
-        addSubview(tableview)
-        self.tableview.dataSource = self
-        self.tableview.delegate=self
-        tableview.register(EditCell.self, forCellReuseIdentifier: "Edit")
-        //cell 생성 코드에서 Identifier 통일시키기
-        
-        tableview.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableview.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            tableview.topAnchor.constraint(equalTo: DatePicker.bottomAnchor, constant: -20),
-            tableview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            tableview.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            tableview.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -100)])
-        
-    }
-}
+
+
+

@@ -16,7 +16,7 @@
 		C93248342A5181EA00908D6B /* AlarmClock_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248332A5181EA00908D6B /* AlarmClock_Tests.swift */; };
 		C932483E2A5181EA00908D6B /* AlarmClock_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932483D2A5181EA00908D6B /* AlarmClock_UITests.swift */; };
 		C93248402A5181EA00908D6B /* AlarmClock_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932483F2A5181EA00908D6B /* AlarmClock_UITestsLaunchTests.swift */; };
-		C932484D2A51829C00908D6B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932484C2A51829C00908D6B /* SecondViewController.swift */; };
+		C932484D2A51829C00908D6B /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932484C2A51829C00908D6B /* EditVC.swift */; };
 		C93248512A5182B700908D6B /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248502A5182B700908D6B /* AlarmView.swift */; };
 		C93248532A5190B700908D6B /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248522A5190B700908D6B /* EditView.swift */; };
 		C93248562A51A3A400908D6B /* EditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248552A51A3A400908D6B /* EditCell.swift */; };
@@ -53,7 +53,7 @@
 		C93248392A5181EA00908D6B /* AlarmClock_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlarmClock_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C932483D2A5181EA00908D6B /* AlarmClock_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmClock_UITests.swift; sourceTree = "<group>"; };
 		C932483F2A5181EA00908D6B /* AlarmClock_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmClock_UITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C932484C2A51829C00908D6B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		C932484C2A51829C00908D6B /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		C93248502A5182B700908D6B /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		C93248522A5190B700908D6B /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		C93248552A51A3A400908D6B /* EditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCell.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				C932481D2A5181E900908D6B /* FirstViewController.swift */,
-				C932484C2A51829C00908D6B /* SecondViewController.swift */,
+				C932484C2A51829C00908D6B /* EditVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -296,7 +296,7 @@
 				C93248242A5181E900908D6B /* AlarmClock_.xcdatamodeld in Sources */,
 				C932481E2A5181E900908D6B /* FirstViewController.swift in Sources */,
 				C932481A2A5181E800908D6B /* AppDelegate.swift in Sources */,
-				C932484D2A51829C00908D6B /* SecondViewController.swift in Sources */,
+				C932484D2A51829C00908D6B /* EditVC.swift in Sources */,
 				C93248532A5190B700908D6B /* EditView.swift in Sources */,
 				C93248512A5182B700908D6B /* AlarmView.swift in Sources */,
 				C932481C2A5181E800908D6B /* SceneDelegate.swift in Sources */,
