@@ -62,7 +62,7 @@ extension FirstViewController{
         
     }
     @objc func RightBtnPressed(_:UIBarButtonItem){
-        let EditVC = SecondViewController()
+        let EditVC = EditVC()
         navigationController?.pushViewController(EditVC, animated: true)
     }
 }

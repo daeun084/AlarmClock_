@@ -15,7 +15,7 @@ class EditVC : UIViewController{
         let array : [String] = ["반복", "레이블", "사운드", "다시 알림"]
         var tableview = UITableView(frame: .zero, style: .insetGrouped)
         
-    let alarmtime : String
+        var alarmtime : String = ""
        weak var delegate : AlarmDelegate?
         //Delegate를 위한 변수 생성 -> func 으로 data 넘기기 위함
         
@@ -46,16 +46,17 @@ class EditVC : UIViewController{
          let dateFormat = DateFormatter()
             dateFormat.timeStyle = .short
             alarmtime = dateFormat.string(from: DatePicker.date)
-         
-           
+         //save 버튼 누르면 데이터 전송
         }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
         overrideUserInterfaceStyle = .dark
-        setTableView()
         setDatePicker()
+        setTableView()
+      
     }
 
 }
@@ -83,7 +84,7 @@ extension EditVC{
         self.delegate?.alarmDelegate(data: alarmtime)
         //delegate(AlarmDelegate)의 func 호출해 alarmtime을 넘김
         //메인 뷰에 데이터 넘김
-        
+        navigationController?.popViewController(animated: true)
     }
 }
 
