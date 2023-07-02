@@ -19,6 +19,7 @@
 		C932484D2A51829C00908D6B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932484C2A51829C00908D6B /* SecondViewController.swift */; };
 		C93248512A5182B700908D6B /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248502A5182B700908D6B /* AlarmView.swift */; };
 		C93248532A5190B700908D6B /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248522A5190B700908D6B /* EditView.swift */; };
+		C93248562A51A3A400908D6B /* EditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248552A51A3A400908D6B /* EditCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		C932484C2A51829C00908D6B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		C93248502A5182B700908D6B /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		C93248522A5190B700908D6B /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		C93248552A51A3A400908D6B /* EditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		C93248182A5181E800908D6B /* AlarmClock_ */ = {
 			isa = PBXGroup;
 			children = (
+				C93248542A51A39300908D6B /* Cell */,
 				C932484E2A5182A200908D6B /* VC */,
 				C932484F2A5182AD00908D6B /* View */,
 				C932481B2A5181E800908D6B /* SceneDelegate.swift */,
@@ -150,6 +153,14 @@
 				C93248522A5190B700908D6B /* EditView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C93248542A51A39300908D6B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C93248552A51A3A400908D6B /* EditCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +300,7 @@
 				C93248532A5190B700908D6B /* EditView.swift in Sources */,
 				C93248512A5182B700908D6B /* AlarmView.swift in Sources */,
 				C932481C2A5181E800908D6B /* SceneDelegate.swift in Sources */,
+				C93248562A51A3A400908D6B /* EditCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
