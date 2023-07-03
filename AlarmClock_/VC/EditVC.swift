@@ -57,7 +57,6 @@ class EditVC : UIViewController{
         setDatePicker()
         setTableView()
         
-      
     }
 
 }

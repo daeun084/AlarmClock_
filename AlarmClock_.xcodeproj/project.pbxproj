@@ -17,7 +17,6 @@
 		C932483E2A5181EA00908D6B /* AlarmClock_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932483D2A5181EA00908D6B /* AlarmClock_UITests.swift */; };
 		C93248402A5181EA00908D6B /* AlarmClock_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932483F2A5181EA00908D6B /* AlarmClock_UITestsLaunchTests.swift */; };
 		C932484D2A51829C00908D6B /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932484C2A51829C00908D6B /* EditVC.swift */; };
-		C93248512A5182B700908D6B /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248502A5182B700908D6B /* AlarmView.swift */; };
 		C93248562A51A3A400908D6B /* EditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248552A51A3A400908D6B /* EditCell.swift */; };
 		C93248582A51BFC900908D6B /* AlarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248572A51BFC900908D6B /* AlarmCell.swift */; };
 /* End PBXBuildFile section */
@@ -54,7 +53,6 @@
 		C932483D2A5181EA00908D6B /* AlarmClock_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmClock_UITests.swift; sourceTree = "<group>"; };
 		C932483F2A5181EA00908D6B /* AlarmClock_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmClock_UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C932484C2A51829C00908D6B /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
-		C93248502A5182B700908D6B /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		C93248552A51A3A400908D6B /* EditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCell.swift; sourceTree = "<group>"; };
 		C93248572A51BFC900908D6B /* AlarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,7 +107,6 @@
 			children = (
 				C93248542A51A39300908D6B /* Cell */,
 				C932484E2A5182A200908D6B /* VC */,
-				C932484F2A5182AD00908D6B /* View */,
 				C932481B2A5181E800908D6B /* SceneDelegate.swift */,
 				C93248192A5181E800908D6B /* AppDelegate.swift */,
 				C93248252A5181EA00908D6B /* Assets.xcassets */,
@@ -144,14 +141,6 @@
 				C932484C2A51829C00908D6B /* EditVC.swift */,
 			);
 			path = VC;
-			sourceTree = "<group>";
-		};
-		C932484F2A5182AD00908D6B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C93248502A5182B700908D6B /* AlarmView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		C93248542A51A39300908D6B /* Cell */ = {
@@ -297,7 +286,6 @@
 				C932481E2A5181E900908D6B /* AlarmVC.swift in Sources */,
 				C932481A2A5181E800908D6B /* AppDelegate.swift in Sources */,
 				C932484D2A51829C00908D6B /* EditVC.swift in Sources */,
-				C93248512A5182B700908D6B /* AlarmView.swift in Sources */,
 				C932481C2A5181E800908D6B /* SceneDelegate.swift in Sources */,
 				C93248562A51A3A400908D6B /* EditCell.swift in Sources */,
 				C93248582A51BFC900908D6B /* AlarmCell.swift in Sources */,
