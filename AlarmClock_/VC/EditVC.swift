@@ -56,6 +56,7 @@ class EditVC : UIViewController{
         overrideUserInterfaceStyle = .dark
         setDatePicker()
         setTableView()
+        
       
     }
 

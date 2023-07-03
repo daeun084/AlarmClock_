@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		C932481A2A5181E800908D6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248192A5181E800908D6B /* AppDelegate.swift */; };
 		C932481C2A5181E800908D6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932481B2A5181E800908D6B /* SceneDelegate.swift */; };
-		C932481E2A5181E900908D6B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932481D2A5181E900908D6B /* FirstViewController.swift */; };
+		C932481E2A5181E900908D6B /* AlarmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932481D2A5181E900908D6B /* AlarmVC.swift */; };
 		C93248242A5181E900908D6B /* AlarmClock_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C93248222A5181E900908D6B /* AlarmClock_.xcdatamodeld */; };
 		C93248262A5181EA00908D6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C93248252A5181EA00908D6B /* Assets.xcassets */; };
 		C93248292A5181EA00908D6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C93248272A5181EA00908D6B /* LaunchScreen.storyboard */; };
@@ -43,7 +43,7 @@
 		C93248162A5181E800908D6B /* AlarmClock_.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmClock_.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C93248192A5181E800908D6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C932481B2A5181E800908D6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C932481D2A5181E900908D6B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		C932481D2A5181E900908D6B /* AlarmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmVC.swift; sourceTree = "<group>"; };
 		C93248232A5181E900908D6B /* AlarmClock_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AlarmClock_.xcdatamodel; sourceTree = "<group>"; };
 		C93248252A5181EA00908D6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C93248282A5181EA00908D6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		C932484E2A5182A200908D6B /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				C932481D2A5181E900908D6B /* FirstViewController.swift */,
+				C932481D2A5181E900908D6B /* AlarmVC.swift */,
 				C932484C2A51829C00908D6B /* EditVC.swift */,
 			);
 			path = VC;
@@ -294,7 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C93248242A5181E900908D6B /* AlarmClock_.xcdatamodeld in Sources */,
-				C932481E2A5181E900908D6B /* FirstViewController.swift in Sources */,
+				C932481E2A5181E900908D6B /* AlarmVC.swift in Sources */,
 				C932481A2A5181E800908D6B /* AppDelegate.swift in Sources */,
 				C932484D2A51829C00908D6B /* EditVC.swift in Sources */,
 				C93248512A5182B700908D6B /* AlarmView.swift in Sources */,

@@ -7,33 +7,35 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class AlarmVC: UIViewController {
+   let alarmView = AlarmView()
     
-    let alarmView : AlarmView = {
-        let alarmview = AlarmView()
-        return alarmview
-    }()
-
     override func viewDidLoad() {
-        self.navigationController?.navigationBar.barStyle = .black
+        //self.navigationController?.navigationBar.barStyle = .black
         //statusbar tint color 변경. viewdidload 전에 사용해야 함
         
         super.viewDidLoad()
+        
+        alarmView.delegate = self
+        view.addSubview(alarmView)
+
         setNavigationBar()
         overrideUserInterfaceStyle = .dark
         //앱을 다크모드로 간주함
         
        
     }
-    override func loadView() {
-        super.loadView()
-        view = alarmView
-    }
-
 
 }
 
-extension FirstViewController{
+extension AlarmVC : AlarmDelegate{
+    func alarmDelegate(data: String) {
+        
+    }
+}
+
+
+extension AlarmVC{
     func setNavigationBar(){
         
         let navigationBar = navigationController!.navigationBar
@@ -62,8 +64,10 @@ extension FirstViewController{
         
     }
     @objc func RightBtnPressed(_:UIBarButtonItem){
-        let EditVC = EditVC()
-        navigationController?.pushViewController(EditVC, animated: true)
+        let editVC = EditVC()
+        editVC.delegate = alarmView
+        //EditVC 인스턴스 생성할 때 delegate 설정
+        navigationController?.pushViewController(editVC, animated: true)
     }
 }
 

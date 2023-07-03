@@ -13,16 +13,14 @@ class AlarmView : UIView{
     var tableview = UITableView(frame: .zero, style: .plain)
     
     override init(frame: CGRect) {
-           super.init(frame: frame)
+        super.init(frame: frame)
         setTableView()
-         
        }
        required init?(coder _: NSCoder) {
            fatalError("Error")
        }
     
 }
-
 
 
 extension AlarmView : AlarmDelegate{
@@ -49,22 +47,38 @@ extension AlarmView : UITableViewDelegate, UITableViewDataSource{
         cell.textLabel?.font = UIFont.systemFont(ofSize: 45, weight: .thin)
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 20)
         
-               return cell
+        return cell
+    }
+    func tableView(_: UITableView, heightForRowAt: IndexPath) -> CGFloat{
+        return 120
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            timeArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            UserDefaults.standard.set(timeArray, forKey: "timeArray")
+        } else if editingStyle == .insert{
+            
+        }
+        
     }
     
     func setTableView(){
-        addSubview(tableview)
-        self.tableview.dataSource = self
-        self.tableview.delegate=self
-        tableview.register(AlarmCell.self, forCellReuseIdentifier: "Alarm")
+        self.addSubview(tableview)
         
         tableview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableview.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            tableview.topAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            tableview.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableview.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            tableview.bottomAnchor.constraint(equalTo: self.bottomAnchor)])
+           tableview.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
+        
+        self.tableview.dataSource = self
+        self.tableview.delegate = self
+        tableview.register(AlarmCell.self, forCellReuseIdentifier: "Alarm")
         
     }
     
