@@ -19,6 +19,7 @@
 		C932484D2A51829C00908D6B /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932484C2A51829C00908D6B /* EditVC.swift */; };
 		C93248562A51A3A400908D6B /* EditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248552A51A3A400908D6B /* EditCell.swift */; };
 		C93248582A51BFC900908D6B /* AlarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248572A51BFC900908D6B /* AlarmCell.swift */; };
+		C97E18A92AA95D0E006AED90 /* SetRepeatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97E18A82AA95D0E006AED90 /* SetRepeatVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		C932484C2A51829C00908D6B /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		C93248552A51A3A400908D6B /* EditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCell.swift; sourceTree = "<group>"; };
 		C93248572A51BFC900908D6B /* AlarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCell.swift; sourceTree = "<group>"; };
+		C97E18A82AA95D0E006AED90 /* SetRepeatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRepeatVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			children = (
 				C932481D2A5181E900908D6B /* AlarmVC.swift */,
 				C932484C2A51829C00908D6B /* EditVC.swift */,
+				C97E18A82AA95D0E006AED90 /* SetRepeatVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			files = (
 				C93248242A5181E900908D6B /* AlarmClock_.xcdatamodeld in Sources */,
 				C932481E2A5181E900908D6B /* AlarmVC.swift in Sources */,
+				C97E18A92AA95D0E006AED90 /* SetRepeatVC.swift in Sources */,
 				C932481A2A5181E800908D6B /* AppDelegate.swift in Sources */,
 				C932484D2A51829C00908D6B /* EditVC.swift in Sources */,
 				C932481C2A5181E800908D6B /* SceneDelegate.swift in Sources */,

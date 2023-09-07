@@ -12,7 +12,6 @@ protocol AlarmDelegate: AnyObject {
 }
 
 class EditVC : UIViewController{
-        let array : [String] = ["반복", "레이블", "사운드", "다시 알림"]
         var tableview = UITableView(frame: .zero, style: .insetGrouped)
         
         var alarmtime : String = ""
@@ -90,22 +89,40 @@ extension EditVC{
 
 extension EditVC : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.array.count
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Edit") as! EditCell
-        cell.textLabel?.text = array[indexPath.row]
         
-        if indexPath.row == 3{
-            cell.accessoryView = UISwitch()
-            //switch 추가
-        }
-        else{
+        switch indexPath.row {
+        case 0:
+            cell.textLabel?.text = "반복"
             cell.accessoryType = .disclosureIndicator
+        case 1:
+            cell.textLabel?.text = "레이블"
+            cell.accessoryType = .disclosureIndicator
+        case 2:
+            cell.textLabel?.text = "사운드"
+            cell.accessoryType = .disclosureIndicator
+        case 3:
+            cell.textLabel?.text = "다시 알림"
+            cell.accessoryView = UISwitch()
+        default:
+            break;
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            print("\(indexPath.row)  push")
+            navigationController?.pushViewController(SetRepeatVC(), animated: true)
+        default:
+            break;
+        }
     }
     
     func setTableView(){
