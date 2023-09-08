@@ -33,7 +33,4 @@ class TabBarController : UITabBarController {
         self.tabBar.tintColor = .orange
 
     }
-    //블러처리 해야 함
-    //다른 tableviewcell들이 아래로 내려왔을 때 검은 배경 유지되도록
-    
 }

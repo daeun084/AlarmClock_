@@ -8,4 +8,23 @@
 import UIKit
 class ClockVC : UIViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
+        makeSubView()
+        makeConstraint()
+    }
+    
+}
+
+extension ClockVC {
+    func makeSubView(){
+        
+    }
+    
+    func makeConstraint(){
+        
+    }
+    
+    
 }

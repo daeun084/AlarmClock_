@@ -7,5 +7,26 @@
 
 import UIKit
 class TimerVC : UIViewController {
+
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
+        makeSubView()
+        makeConstraint()
+    }
+    
+}
+
+extension TimerVC {
+    func makeSubView(){
+        
+    }
+    
+    func makeConstraint(){
+        
+    }
+    
     
 }

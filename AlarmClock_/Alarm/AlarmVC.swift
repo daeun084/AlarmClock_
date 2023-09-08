@@ -21,6 +21,7 @@ class AlarmVC: UIViewController {
         super.viewDidLoad()
         setTableView()
         setNavigationBar()
+        setTabBar()
         overrideUserInterfaceStyle = .dark
         //앱을 다크모드로 간주함
        
@@ -48,7 +49,6 @@ extension AlarmVC{
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 20)]
        // navigationBar.prefersLargeTitles = true
         
-        
         navigationItem.title = "알람"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(LeftBtnPressed(_:)))
@@ -72,6 +72,16 @@ extension AlarmVC{
         //EditVC 인스턴스 생성할 때 delegate 설정
         navigationController?.pushViewController(editVC, animated: true)
     }
+    
+    func setTabBar(){
+        let tabBar = tabBarController?.tabBar
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.backgroundEffect = UIBlurEffect(style: .dark)
+        
+        tabBar?.standardAppearance = tabBarAppearance
+        tabBar?.scrollEdgeAppearance = tabBarAppearance
+    }
 }
 
 
@@ -92,6 +102,7 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
         
         return cell
     }
+    
     func tableView(_: UITableView, heightForRowAt: IndexPath) -> CGFloat{
         return 120
     }
