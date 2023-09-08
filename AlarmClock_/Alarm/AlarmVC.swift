@@ -107,6 +107,10 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(EditVC(), animated: true)
+    }
+    
     func setTableView(){
         view.addSubview(tableview)
         

@@ -82,7 +82,7 @@ extension SetRepeatVC : UITableViewDelegate, UITableViewDataSource {
 extension SetRepeatVC {
     func setNavigationBar(){
         self.title = "반복"
-        var backBtn = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelFunc(_:)))
+        let backBtn = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelFunc(_:)))
         backBtn.title = "뒤로"
         backBtn.tintColor = .orange
         navigationItem.backBarButtonItem = backBtn
