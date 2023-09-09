@@ -25,7 +25,6 @@
 		C9C3CB472AAAD621002FD6DE /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CB462AAAD621002FD6DE /* TimerVC.swift */; };
 		C9C3CB492AAAD628002FD6DE /* ClockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CB482AAAD628002FD6DE /* ClockVC.swift */; };
 		C9C3CB4B2AAAD7A4002FD6DE /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CB4A2AAAD7A4002FD6DE /* Extension.swift */; };
-		C9C3CB512AAB2C15002FD6DE /* scheduledTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CB502AAB2C15002FD6DE /* scheduledTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +67,6 @@
 		C9C3CB462AAAD621002FD6DE /* TimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
 		C9C3CB482AAAD628002FD6DE /* ClockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockVC.swift; sourceTree = "<group>"; };
 		C9C3CB4A2AAAD7A4002FD6DE /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		C9C3CB502AAB2C15002FD6DE /* scheduledTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scheduledTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				C9C3CB442AAAD619002FD6DE /* StopWatchVC.swift */,
-				C9C3CB502AAB2C15002FD6DE /* scheduledTimer.swift */,
 			);
 			path = StopWatch;
 			sourceTree = "<group>";
@@ -332,7 +329,6 @@
 				C9C3CB472AAAD621002FD6DE /* TimerVC.swift in Sources */,
 				C93248242A5181E900908D6B /* AlarmClock_.xcdatamodeld in Sources */,
 				C932481E2A5181E900908D6B /* AlarmVC.swift in Sources */,
-				C9C3CB512AAB2C15002FD6DE /* scheduledTimer.swift in Sources */,
 				C97E18A92AA95D0E006AED90 /* SetRepeatVC.swift in Sources */,
 				C9C3CB432AAAD577002FD6DE /* TabBarController.swift in Sources */,
 				C932481A2A5181E800908D6B /* AppDelegate.swift in Sources */,
