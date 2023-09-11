@@ -17,6 +17,10 @@ class StopWatchVC : UIViewController {
     }()
     var stopWatchTimer : Timer?
     var elapsedTime : TimeInterval = 0
+    var tableView = UITableView(frame: .zero, style: .plain)
+    var labArray : [Int] = []
+    
+    
     
     let labBtn : UIButton = {
         let btn = UIButton()
@@ -47,7 +51,8 @@ class StopWatchVC : UIViewController {
         makeSubView()
         makeConstraint()
         makeAddTarget()
-        timeLabel.text = "0:00:00"
+        setTableView()
+        timeLabel.text = "00:00:00"
     }
     
 }
@@ -84,23 +89,17 @@ extension StopWatchVC {
     
     func makeAddTarget(){
         startBtn.addTarget(self, action: #selector(setStartBtnFunc(sender:)), for: .allEvents)
+        labBtn.addTarget(self, action: #selector(setlabBtnFunc(sender: )), for: .allEvents)
     }
     
     @objc func setStartBtnFunc(sender : UIButton){
         if let timer = stopWatchTimer {
             //timer가 running중이면 멈추기
-            
-            elapsedTime = 0
             stopWatchTimer = nil
             timer.invalidate()
             sender.configuration?.baseBackgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
             sender.setTitle("Start", for: .normal)
-            
-            
-            //초기화 기능 지우고
-            //Lab 버튼을 재설정으로 수정 -> 누르면 초기화
-            //running 중일 때 Lab btn 누르면 시간 기록
-            //stop 버튼 누르면 lab btn - reset btn
+            labBtn.setTitle("Reset", for: .normal)
             
         }
         else{
@@ -117,8 +116,52 @@ extension StopWatchVC {
             })
             sender.configuration?.baseBackgroundColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
             sender.setTitle("Stop", for: .normal)
+            labBtn.setTitle("Lab", for: .normal)
     }
         
     
     }
+    
+    @objc func setlabBtnFunc(sender : UIButton) {
+        if let timer = stopWatchTimer {
+            //Timer가 running중이라면
+            //Lab
+           // labArray.append(Int(elapsedTime))
+           // print(labArray.count)
+            
+            
+        }
+        else{
+            //Timer가 running중이 아니라면
+            //Reset
+            elapsedTime = 0
+            timeLabel.text = "00:00:00"
+            labBtn.setTitle("Lab", for: .normal)
+            labArray = []
+            
+        }
+    }
+}
+
+extension StopWatchVC : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return labArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "stopWatchCell", for: indexPath)
+        //cell.textLabel?.text =
+        return cell
+    }
+    
+    func setTableView(){
+        view.addSubview(tableView)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "stopWatchCell")
+
+        
+    }
+    
+    
 }
