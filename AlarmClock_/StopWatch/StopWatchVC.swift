@@ -15,10 +15,11 @@ class StopWatchVC : UIViewController {
         label.textAlignment = .center
         return label
     }()
+    
     var stopWatchTimer : Timer?
     var elapsedTime : TimeInterval = 0
     var tableView = UITableView(frame: .zero, style: .plain)
-    var labArray : [Int] = []
+    var labArray : [Double] = []
     
     
     
@@ -50,8 +51,9 @@ class StopWatchVC : UIViewController {
         overrideUserInterfaceStyle = .dark
         makeSubView()
         makeConstraint()
-        makeAddTarget()
         setTableView()
+        makeAddTarget()
+        
         timeLabel.text = "00:00:00"
     }
     
@@ -88,8 +90,8 @@ extension StopWatchVC {
     }
     
     func makeAddTarget(){
-        startBtn.addTarget(self, action: #selector(setStartBtnFunc(sender:)), for: .allEvents)
-        labBtn.addTarget(self, action: #selector(setlabBtnFunc(sender: )), for: .allEvents)
+        startBtn.addTarget(self, action: #selector(setStartBtnFunc(sender:)), for: .touchUpInside)
+        labBtn.addTarget(self, action: #selector(setlabBtnFunc(sender: )), for: .touchUpInside)
     }
     
     @objc func setStartBtnFunc(sender : UIButton){
@@ -126,9 +128,8 @@ extension StopWatchVC {
         if let timer = stopWatchTimer {
             //Timer가 running중이라면
             //Lab
-           // labArray.append(Int(elapsedTime))
-           // print(labArray.count)
-            
+           labArray.append(elapsedTime)
+            print(labArray[labArray.count - 1])
             
         }
         else{
@@ -140,6 +141,8 @@ extension StopWatchVC {
             labArray = []
             
         }
+        tableView.reloadData()
+
     }
 }
 
@@ -150,15 +153,46 @@ extension StopWatchVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stopWatchCell", for: indexPath)
-        //cell.textLabel?.text =
+        
+        let accessoryLabel : UILabel = {
+           let label = UILabel()
+            
+            let time = (Int)(labArray[indexPath.row])
+            
+            let minutes = time / 60 % 60
+            let seconds = time % 60
+            let milliseconds = Int(labArray[indexPath.row] * 100) % 100
+                           
+            label.text = String(format: "%02d:%02d:%02d", minutes, seconds, milliseconds)
+            return label
+        }()
+        
+        cell.accessoryView = accessoryLabel
+        cell.textLabel?.text = "Lab \(indexPath.row + 1)"
+        cell.tintColor = .white
+
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+    
     func setTableView(){
+        tableView.backgroundColor = .black
         view.addSubview(tableView)
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "stopWatchCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: labBtn.bottomAnchor, constant: 50),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
 
         
     }
