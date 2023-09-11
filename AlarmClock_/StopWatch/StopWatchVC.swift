@@ -139,6 +139,7 @@ extension StopWatchVC {
             timeLabel.text = "00:00:00"
             labBtn.setTitle("Lab", for: .normal)
             labArray = []
+            print(labArray)
             
         }
         tableView.reloadData()
@@ -154,9 +155,16 @@ extension StopWatchVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stopWatchCell", for: indexPath)
         
+        for subview in cell.contentView.subviews {
+             subview.removeFromSuperview()
+         }
+        //contentView 위에 Label을 계속해서 addSubView하면 여러 view가 겹치는 문제 발생
+        //이 전에 있던 subView들을 제거한다
+        
+        
         let accessoryLabel : UILabel = {
            let label = UILabel()
-            
+            label.textColor = .white
             let time = (Int)(labArray[indexPath.row])
             
             let minutes = time / 60 % 60
@@ -164,13 +172,25 @@ extension StopWatchVC : UITableViewDelegate, UITableViewDataSource {
             let milliseconds = Int(labArray[indexPath.row] * 100) % 100
                            
             label.text = String(format: "%02d:%02d:%02d", minutes, seconds, milliseconds)
+            label.translatesAutoresizingMaskIntoConstraints = false
             return label
         }()
         
-        cell.accessoryView = accessoryLabel
+        cell.accessoryView = nil
+        //기존 accessoryView를 지우고 contentView에 Label 추가
+        cell.contentView.addSubview(accessoryLabel)
+        
+        
+        
+        NSLayoutConstraint.activate([
+              accessoryLabel.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
+              accessoryLabel.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -20), // 원하는 위치로 조절
+          ])
+        
+        
+        
         cell.textLabel?.text = "Lab \(indexPath.row + 1)"
         cell.tintColor = .white
-
         return cell
     }
     
