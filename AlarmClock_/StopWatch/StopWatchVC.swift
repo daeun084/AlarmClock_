@@ -181,7 +181,6 @@ extension StopWatchVC : UITableViewDelegate, UITableViewDataSource {
         cell.contentView.addSubview(accessoryLabel)
         
         
-        
         NSLayoutConstraint.activate([
               accessoryLabel.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
               accessoryLabel.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -20), // 원하는 위치로 조절

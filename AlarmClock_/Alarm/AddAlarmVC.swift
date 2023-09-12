@@ -11,7 +11,7 @@ protocol AlarmDelegate: AnyObject {
     func alarmDelegate(data: String)
 }
 
-class EditVC : UIViewController{
+class AddAlarmVC : UIViewController{
         var tableview = UITableView(frame: .zero, style: .insetGrouped)
         
         var alarmtime : String = ""
@@ -60,7 +60,7 @@ class EditVC : UIViewController{
 
 }
 
-extension EditVC{
+extension AddAlarmVC{
     
     func setNavigation(){
         let appearance = UINavigationBarAppearance()
@@ -87,7 +87,7 @@ extension EditVC{
     }
 }
 
-extension EditVC : UITableViewDelegate, UITableViewDataSource{
+extension AddAlarmVC : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }

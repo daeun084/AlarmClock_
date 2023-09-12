@@ -51,7 +51,7 @@ extension AlarmVC{
         
         navigationItem.title = "알람"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(LeftBtnPressed(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(LeftBtnPressed(sender:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(RightBtnPressed(_:)))
         navigationItem.rightBarButtonItem?.tintColor = .orange
         navigationItem.leftBarButtonItem?.tintColor = .orange
@@ -62,12 +62,16 @@ extension AlarmVC{
         navigationBar.scrollEdgeAppearance = appearance
     }
     
-    @objc func LeftBtnPressed(_: UIBarButtonItem){
-        
+    @objc func LeftBtnPressed(sender: UIBarButtonItem){
+        let shouldBeEdited = !tableview.isEditing
+           tableview.setEditing(shouldBeEdited, animated: true)
+          sender.isSelected = shouldBeEdited
     }
+    //눌렀을 때 editing 가능하게 함
+    
     
     @objc func RightBtnPressed(_:UIBarButtonItem){
-        let editVC = EditVC()
+        let editVC = AddAlarmVC()
         editVC.delegate = self
         //EditVC 인스턴스 생성할 때 delegate 설정
         navigationController?.pushViewController(editVC, animated: true)
@@ -118,8 +122,14 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
         
     }
     
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        (indexPath.row >= 0)
+    }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(EditVC(), animated: true)
+        navigationController?.pushViewController(EditAlarmVC(), animated: true)
     }
     
     func setTableView(){

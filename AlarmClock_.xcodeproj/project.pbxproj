@@ -16,10 +16,11 @@
 		C93248342A5181EA00908D6B /* AlarmClock_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248332A5181EA00908D6B /* AlarmClock_Tests.swift */; };
 		C932483E2A5181EA00908D6B /* AlarmClock_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932483D2A5181EA00908D6B /* AlarmClock_UITests.swift */; };
 		C93248402A5181EA00908D6B /* AlarmClock_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932483F2A5181EA00908D6B /* AlarmClock_UITestsLaunchTests.swift */; };
-		C932484D2A51829C00908D6B /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932484C2A51829C00908D6B /* EditVC.swift */; };
+		C932484D2A51829C00908D6B /* AddAlarmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932484C2A51829C00908D6B /* AddAlarmVC.swift */; };
 		C93248562A51A3A400908D6B /* EditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248552A51A3A400908D6B /* EditCell.swift */; };
 		C93248582A51BFC900908D6B /* AlarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248572A51BFC900908D6B /* AlarmCell.swift */; };
 		C97E18A92AA95D0E006AED90 /* SetRepeatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97E18A82AA95D0E006AED90 /* SetRepeatVC.swift */; };
+		C9C074B62AB011680037A416 /* EditAlarmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C074B52AB011680037A416 /* EditAlarmVC.swift */; };
 		C9C3CB432AAAD577002FD6DE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CB422AAAD577002FD6DE /* TabBarController.swift */; };
 		C9C3CB452AAAD619002FD6DE /* StopWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CB442AAAD619002FD6DE /* StopWatchVC.swift */; };
 		C9C3CB472AAAD621002FD6DE /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3CB462AAAD621002FD6DE /* TimerVC.swift */; };
@@ -58,10 +59,11 @@
 		C93248392A5181EA00908D6B /* AlarmClock_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlarmClock_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C932483D2A5181EA00908D6B /* AlarmClock_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmClock_UITests.swift; sourceTree = "<group>"; };
 		C932483F2A5181EA00908D6B /* AlarmClock_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmClock_UITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C932484C2A51829C00908D6B /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
+		C932484C2A51829C00908D6B /* AddAlarmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmVC.swift; sourceTree = "<group>"; };
 		C93248552A51A3A400908D6B /* EditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCell.swift; sourceTree = "<group>"; };
 		C93248572A51BFC900908D6B /* AlarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCell.swift; sourceTree = "<group>"; };
 		C97E18A82AA95D0E006AED90 /* SetRepeatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRepeatVC.swift; sourceTree = "<group>"; };
+		C9C074B52AB011680037A416 /* EditAlarmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAlarmVC.swift; sourceTree = "<group>"; };
 		C9C3CB422AAAD577002FD6DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C9C3CB442AAAD619002FD6DE /* StopWatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchVC.swift; sourceTree = "<group>"; };
 		C9C3CB462AAAD621002FD6DE /* TimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
@@ -164,8 +166,9 @@
 			isa = PBXGroup;
 			children = (
 				C932481D2A5181E900908D6B /* AlarmVC.swift */,
-				C932484C2A51829C00908D6B /* EditVC.swift */,
+				C932484C2A51829C00908D6B /* AddAlarmVC.swift */,
 				C97E18A82AA95D0E006AED90 /* SetRepeatVC.swift */,
+				C9C074B52AB011680037A416 /* EditAlarmVC.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -330,9 +333,10 @@
 				C93248242A5181E900908D6B /* AlarmClock_.xcdatamodeld in Sources */,
 				C932481E2A5181E900908D6B /* AlarmVC.swift in Sources */,
 				C97E18A92AA95D0E006AED90 /* SetRepeatVC.swift in Sources */,
+				C9C074B62AB011680037A416 /* EditAlarmVC.swift in Sources */,
 				C9C3CB432AAAD577002FD6DE /* TabBarController.swift in Sources */,
 				C932481A2A5181E800908D6B /* AppDelegate.swift in Sources */,
-				C932484D2A51829C00908D6B /* EditVC.swift in Sources */,
+				C932484D2A51829C00908D6B /* AddAlarmVC.swift in Sources */,
 				C9C3CB4B2AAAD7A4002FD6DE /* Extension.swift in Sources */,
 				C932481C2A5181E800908D6B /* SceneDelegate.swift in Sources */,
 				C93248562A51A3A400908D6B /* EditCell.swift in Sources */,
