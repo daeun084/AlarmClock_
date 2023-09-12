@@ -75,6 +75,7 @@ extension AlarmVC{
         editVC.delegate = self
         //EditVC 인스턴스 생성할 때 delegate 설정
         navigationController?.pushViewController(editVC, animated: true)
+        //present(editVC, animated: true)
     }
     
     func setTabBar(){
