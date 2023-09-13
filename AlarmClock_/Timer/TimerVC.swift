@@ -10,15 +10,21 @@ class TimerVC : UIViewController {
     
     
     var stopWatchTimer : Timer?
-    var elapsedTime : TimeInterval = 0
+   var elapsedTime : TimeInterval = 0
     var tableView = UITableView(frame: .zero, style: .insetGrouped)
+    var remainTime : Int!
+    
+    let TimerView : TimerUIView = {
+       let view = TimerUIView()
+        return view
+    }()
     
     
     let DatePicker : UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .countDownTimer
         picker.preferredDatePickerStyle = .wheels
-        //picker.countDownDuration =
+        picker.countDownDuration = 60
         return picker
     }()
     
@@ -50,10 +56,12 @@ class TimerVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
+        
         makeSubView()
         makeConstraint()
         makeAddTarget()
         setTableView()
+        
     }
     
 }
@@ -91,14 +99,26 @@ extension TimerVC {
     }
     
     func makeAddTarget(){
+        DatePicker.addTarget(self, action: #selector(datePickFunc(_:)), for: .valueChanged)
         cancelBtn.addTarget(self, action: #selector(cancelBtnFunc(sender:)), for: .touchUpInside)
         startBtn.addTarget(self, action: #selector(startBtnFunc(sender:)), for: .touchUpInside)
         
     }
     
+    @objc func datePickFunc(_: UIDatePicker) {
+        let dateFormat = DateFormatter()
+           dateFormat.timeStyle = .short
+          // remainTime = dateFormat.string(from: DatePicker.date)
+        remainTime = (Int)(DatePicker.countDownDuration)
+        print(remainTime!)
+    }
+    
     @objc func cancelBtnFunc(sender: UIButton){
         //timer가 runnig 중이라면 Cancel
         if let timer = stopWatchTimer {
+            
+            
+            //vezeri view 대신 datepicker
             
             //초기화면으로 돌아감
             startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
@@ -115,7 +135,7 @@ extension TimerVC {
     }
     
     @objc func startBtnFunc(sender:UIButton){
-                
+        //Timer elapsed time 지정해야 함
         
         //timer가 running 중이라면 일시정지 -> 재개
         if let timer = stopWatchTimer {
@@ -124,11 +144,20 @@ extension TimerVC {
         }
         else{
             //timer가 일시정지되었다면 Continue -> 일시정지
+       
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                self.remainTime -= 1
+                   // self.countdownLabel.text = "\(self.remainingTime)"
+                print(self.remainTime)
+                
+                    if self.remainTime == 0 {
+                        timer.invalidate()
+                    }
+                }
 
             startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1)
             startBtn.setTitle("Stop", for: .normal)
         }
-        
     }
     
 }
