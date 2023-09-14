@@ -10,7 +10,7 @@ class TimerVC : UIViewController {
     
     
     var stopWatchTimer : Timer?
- //  var elapsedTime : TimeInterval = 0
+    var initTime = 0
     var tableView = UITableView(frame: .zero, style: .insetGrouped)
     var remainTime : Int = 0
     
@@ -78,6 +78,7 @@ extension TimerVC {
         DatePicker.translatesAutoresizingMaskIntoConstraints = false
         cancelBtn.translatesAutoresizingMaskIntoConstraints = false
         startBtn.translatesAutoresizingMaskIntoConstraints = false
+        TimerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             DatePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
@@ -111,6 +112,7 @@ extension TimerVC {
         
         //DatePicker의 시간 .countDownDuration 통해 얻어냄
         remainTime = (Int)(DatePicker.countDownDuration)
+        initTime = remainTime
         print(remainTime)
     }
     
@@ -128,8 +130,12 @@ extension TimerVC {
     }
     
     @objc func startBtnFunc(sender:UIButton){
+     
         //timer가 running 중이라면 일시정지 -> 재개
         if let timer = stopWatchTimer {
+            
+            TimerView.pause()
+            //timer 일시정지
             stopWatchTimer = nil
             timer.invalidate()
             print("remainTime = \(remainTime)")
@@ -140,21 +146,34 @@ extension TimerVC {
         else{
             //timer가 일시정지되었다면 Continue -> 일시정지
        
-            stopWatchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            stopWatchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
                 self.remainTime -= Int(timer.timeInterval)
                 
+                
+                self.view.addSubview(self.TimerView)
+                NSLayoutConstraint.activate([
+                    TimerView.topAnchor.constraint(equalTo: self.DatePicker.topAnchor),
+                    TimerView.leadingAnchor.constraint(equalTo: self.DatePicker.leadingAnchor),
+                    TimerView.trailingAnchor.constraint(equalTo: self.DatePicker.trailingAnchor),
+                    TimerView.bottomAnchor.constraint(equalTo: DatePicker.bottomAnchor),])
                 
                 let hours = self.remainTime / 60 / 60
                 let minutes = self.remainTime / 60 % 60
                 let seconds = self.remainTime % 60
                                
-               // self?.countdownLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+                self.TimerView.timeLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+                self.TimerView.start(remainTime: remainTime, initTime: initTime)
+               
+                
                 print("\(self.remainTime), \(hours)시간 \(minutes)분 \(seconds)초")
+
                 
                 //timer 종료
                     if self.remainTime == 0 {
                        timer.invalidate()
                         print("remainTime == 0")
+                        TimerView.stop()
+                        
                     }
                 }
 
