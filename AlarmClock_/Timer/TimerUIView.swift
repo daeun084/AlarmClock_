@@ -13,6 +13,17 @@ class TimerUIView : UIView {
         
         return label
     }
+    /*
+    private let backgroundLayer = CAShapeLayer()
+     private let progressLayer = CAShapeLayer()
+     private let animationName = "progressAnimation"
+     private var timer: Timer?
+     private var remainingSeconds: TimeInterval? {
+       didSet {
+         guard let remainingSeconds = self.remainingSeconds else { return }
+         self.timeLabel.text = String(format: "%02ds", Int(remainingSeconds))
+       }
+     }*/
     
     private var circularPath: UIBezierPath {
        UIBezierPath(
@@ -42,5 +53,10 @@ extension TimerUIView {
     
     func makeConstraint(){
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            timeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            timeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+        ])
     }
 }

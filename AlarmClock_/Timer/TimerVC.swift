@@ -10,9 +10,9 @@ class TimerVC : UIViewController {
     
     
     var stopWatchTimer : Timer?
-   var elapsedTime : TimeInterval = 0
+ //  var elapsedTime : TimeInterval = 0
     var tableView = UITableView(frame: .zero, style: .insetGrouped)
-    var remainTime : Int!
+    var remainTime : Int = 0
     
     let TimerView : TimerUIView = {
        let view = TimerUIView()
@@ -108,50 +108,53 @@ extension TimerVC {
     @objc func datePickFunc(_: UIDatePicker) {
         let dateFormat = DateFormatter()
            dateFormat.timeStyle = .short
-          // remainTime = dateFormat.string(from: DatePicker.date)
+        
+        //DatePicker의 시간 .countDownDuration 통해 얻어냄
         remainTime = (Int)(DatePicker.countDownDuration)
-        print(remainTime!)
+        print(remainTime)
     }
     
     @objc func cancelBtnFunc(sender: UIButton){
-        //timer가 runnig 중이라면 Cancel
-        if let timer = stopWatchTimer {
-            
+        let timer = stopWatchTimer
+            remainTime = 0
+            print("Reset / remainTime = \(remainTime)")
+        timer?.invalidate()
             
             //vezeri view 대신 datepicker
             
             //초기화면으로 돌아감
             startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
             startBtn.setTitle("Start", for: .normal)
-
-        }
-        else{
-            //timer가 설정되어 있지 않다면 cancel 비활성화, Start
-            
-            
-            
-        }
-        
     }
     
     @objc func startBtnFunc(sender:UIButton){
-        //Timer elapsed time 지정해야 함
-        
         //timer가 running 중이라면 일시정지 -> 재개
         if let timer = stopWatchTimer {
+            stopWatchTimer = nil
+            timer.invalidate()
+            print("remainTime = \(remainTime)")
+            
             startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
             startBtn.setTitle("Continue", for: .normal)
         }
         else{
             //timer가 일시정지되었다면 Continue -> 일시정지
        
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                self.remainTime -= 1
-                   // self.countdownLabel.text = "\(self.remainingTime)"
-                print(self.remainTime)
+            stopWatchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                self.remainTime -= Int(timer.timeInterval)
                 
+                
+                let hours = self.remainTime / 60 / 60
+                let minutes = self.remainTime / 60 % 60
+                let seconds = self.remainTime % 60
+                               
+               // self?.countdownLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+                print("\(self.remainTime), \(hours)시간 \(minutes)분 \(seconds)초")
+                
+                //timer 종료
                     if self.remainTime == 0 {
-                        timer.invalidate()
+                       timer.invalidate()
+                        print("remainTime == 0")
                     }
                 }
 
