@@ -145,17 +145,19 @@ extension TimerVC {
         }
         else{
             //timer가 일시정지되었다면 Continue -> 일시정지
+            
+            if(initTime == remainTime){
+            self.view.addSubview(self.TimerView)
+            NSLayoutConstraint.activate([
+                TimerView.topAnchor.constraint(equalTo: self.DatePicker.topAnchor),
+                TimerView.leadingAnchor.constraint(equalTo: self.DatePicker.leadingAnchor),
+                TimerView.trailingAnchor.constraint(equalTo: self.DatePicker.trailingAnchor),
+                TimerView.bottomAnchor.constraint(equalTo: DatePicker.bottomAnchor),])
+        }
+        
        
             stopWatchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
                 self.remainTime -= Int(timer.timeInterval)
-                
-                
-                self.view.addSubview(self.TimerView)
-                NSLayoutConstraint.activate([
-                    TimerView.topAnchor.constraint(equalTo: self.DatePicker.topAnchor),
-                    TimerView.leadingAnchor.constraint(equalTo: self.DatePicker.leadingAnchor),
-                    TimerView.trailingAnchor.constraint(equalTo: self.DatePicker.trailingAnchor),
-                    TimerView.bottomAnchor.constraint(equalTo: DatePicker.bottomAnchor),])
                 
                 let hours = self.remainTime / 60 / 60
                 let minutes = self.remainTime / 60 % 60
@@ -164,7 +166,6 @@ extension TimerVC {
                 self.TimerView.timeLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
                 self.TimerView.start(remainTime: remainTime, initTime: initTime)
                
-                
                 print("\(self.remainTime), \(hours)시간 \(minutes)분 \(seconds)초")
 
                 
@@ -173,10 +174,8 @@ extension TimerVC {
                        timer.invalidate()
                         print("remainTime == 0")
                         TimerView.stop()
-                        
                     }
                 }
-
             startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1)
             startBtn.setTitle("Stop", for: .normal)
         }

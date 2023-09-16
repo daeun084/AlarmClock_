@@ -25,7 +25,7 @@ class TimerUIView : UIView {
     private var circularPath: UIBezierPath {
       UIBezierPath(
         arcCenter: CGPoint(x: self.frame.size.width / 2.0, y: self.frame.size.height / 2.0),
-        radius: 80,
+        radius: 150,
         startAngle: CGFloat(-Double.pi / 2),
         endAngle: CGFloat(3 * Double.pi / 2),
         clockwise: true
@@ -75,40 +75,39 @@ extension TimerUIView {
         self.backgroundLayer.path = self.circularPath.cgPath
           self.backgroundLayer.fillColor = UIColor.clear.cgColor
           self.backgroundLayer.lineCap = .round
-          self.backgroundLayer.lineWidth = 5.0
+          self.backgroundLayer.lineWidth = 8.0
           self.backgroundLayer.strokeEnd = 1.0
         self.backgroundLayer.strokeColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
           
           self.progressLayer.path = self.circularPath.cgPath
           self.progressLayer.fillColor = UIColor.clear.cgColor
           self.progressLayer.lineCap = .round
-          self.progressLayer.lineWidth = 5.0
+          self.progressLayer.lineWidth = 8.0
           self.progressLayer.strokeEnd = 0
         self.progressLayer.strokeColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
     }
     
     func start(remainTime : Int, initTime : Int){
-        
-        if (remainTime == initTime){
-            self.progressLayer.removeAnimation(forKey: self.animationName)
-        }
         let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
         circularProgressAnimation.duration = CFTimeInterval(remainTime)
         circularProgressAnimation.toValue = 1.0
         circularProgressAnimation.fillMode = .forwards
         circularProgressAnimation.isRemovedOnCompletion = false
-        self.progressLayer.add(circularProgressAnimation, forKey: self.animationName)
+        if (remainTime == initTime - 1){
+            self.progressLayer.add(circularProgressAnimation, forKey: self.animationName)
+            print("remain == init")
+        }
+        print("beiz start")
     }
     
     func pause(){
-        let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        circularProgressAnimation.toValue = 1.0
-        circularProgressAnimation.fillMode = .forwards
-        circularProgressAnimation.isRemovedOnCompletion = false
+        print("beiz pause")
+        //구현 필요
     }
     
     
     func stop() {
       self.progressLayer.removeAnimation(forKey: self.animationName)
+        print("beiz stop")
     }
 }
