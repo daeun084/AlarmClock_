@@ -10,9 +10,9 @@ class TimerVC : UIViewController {
     
     
     var stopWatchTimer : Timer?
-    var initTime = 0
     var tableView = UITableView(frame: .zero, style: .insetGrouped)
-    var remainTime : Int = 0
+    var remainTime : Int = 60
+    var initTime = 60
     
     let TimerView : TimerUIView = {
        let view = TimerUIView()
@@ -61,7 +61,6 @@ class TimerVC : UIViewController {
         makeConstraint()
         makeAddTarget()
         setTableView()
-        
     }
     
 }
@@ -121,7 +120,8 @@ extension TimerVC {
             remainTime = 0
             print("Reset / remainTime = \(remainTime)")
         timer?.invalidate()
-            
+        TimerView.stop()
+        
             //vezeri view 대신 datepicker
             
             //초기화면으로 돌아감
@@ -134,10 +134,9 @@ extension TimerVC {
         //timer가 running 중이라면 일시정지 -> 재개
         if let timer = stopWatchTimer {
             
-            TimerView.pause()
-            //timer 일시정지
-            stopWatchTimer = nil
             timer.invalidate()
+            TimerView.pauseFunc()
+            stopWatchTimer = nil
             print("remainTime = \(remainTime)")
             
             startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)

@@ -21,6 +21,8 @@ class TimerUIView : UIView {
     private let backgroundLayer = CAShapeLayer()
     private let progressLayer = CAShapeLayer()
     private let animationName = "progressAnimation"
+    let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
+
 
     private var circularPath: UIBezierPath {
       UIBezierPath(
@@ -88,26 +90,42 @@ extension TimerUIView {
     }
     
     func start(remainTime : Int, initTime : Int){
-        let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        circularProgressAnimation.duration = CFTimeInterval(remainTime)
-        circularProgressAnimation.toValue = 1.0
-        circularProgressAnimation.fillMode = .forwards
-        circularProgressAnimation.isRemovedOnCompletion = false
-        if (remainTime == initTime - 1){
-            self.progressLayer.add(circularProgressAnimation, forKey: self.animationName)
-            print("remain == init")
+        if progressLayer.animation(forKey: animationName) == nil {
+               // 애니메이션이 시작되지 않은 경우, 시작
+               print("애니메이션 시작")
+               circularProgressAnimation.duration = CFTimeInterval(remainTime)
+               circularProgressAnimation.toValue = 1.0
+               circularProgressAnimation.fillMode = .backwards
+               circularProgressAnimation.isRemovedOnCompletion = false
+               if remainTime == initTime - 1 {
+                   progressLayer.add(circularProgressAnimation, forKey: animationName)
+                   print("remain == init")
+               }
+        } else if progressLayer.speed == 0.0 {
+            // 애니메이션이 일시 중지된 경우, 재개
+            print("애니메이션 재개")
+            let pausedTime = progressLayer.timeOffset
+            progressLayer.speed = 1.0
+            progressLayer.timeOffset = 0.0
+            progressLayer.beginTime = 0.0
+            let timeSincePause = progressLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+            progressLayer.beginTime = timeSincePause
         }
-        print("beiz start")
+        
     }
     
-    func pause(){
+    func pauseFunc(){
         print("beiz pause")
-        //구현 필요
+        let pausedTime = progressLayer.convertTime(CACurrentMediaTime(), from: nil)
+            progressLayer.speed = 0.0
+            progressLayer.timeOffset = pausedTime
     }
     
     
     func stop() {
-      self.progressLayer.removeAnimation(forKey: self.animationName)
         print("beiz stop")
+        self.progressLayer.removeAnimation(forKey: self.animationName)
+        self.timeLabel.text = "00:00:00"
+
     }
 }
