@@ -30,23 +30,26 @@ class TimerVC : UIViewController {
     
     let cancelBtn : UIButton = {
         let btn = UIButton()
-        var title = AttributedString("Cancel")
+        var title = AttributedString("취소")
+        title.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         var config = UIButton.Configuration.filled()
         config.cornerStyle = .capsule
         config.attributedTitle = title
-        config.baseBackgroundColor = #colorLiteral(red: 0.3781762719, green: 0.3781762719, blue: 0.3781762719, alpha: 1)
-       // config.baseForegroundColor = .systemGray4
+        config.baseBackgroundColor = #colorLiteral(red: 0.2009792924, green: 0.2009792924, blue: 0.2009792924, alpha: 1)
+        config.baseForegroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         btn.configuration = config
         return btn
     }()
     
     let startBtn : UIButton = {
         let btn = UIButton()
-        var title = AttributedString("Start")
+        var title = AttributedString("시작")
+        title.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         var config = UIButton.Configuration.filled()
         config.cornerStyle = .capsule
         config.attributedTitle = title
-        config.baseBackgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
+        config.baseBackgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
+        config.baseForegroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
         btn.configuration = config
         return btn
     }()
@@ -86,7 +89,7 @@ extension TimerVC {
             
             cancelBtn.topAnchor.constraint(equalTo: DatePicker.bottomAnchor, constant: 40),
             cancelBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            cancelBtn.widthAnchor.constraint(equalToConstant: 80),
+            cancelBtn.widthAnchor.constraint(equalToConstant: 85),
             cancelBtn.heightAnchor.constraint(equalTo: cancelBtn.widthAnchor),
             
             startBtn.topAnchor.constraint(equalTo: cancelBtn.topAnchor),
@@ -117,16 +120,16 @@ extension TimerVC {
     
     @objc func cancelBtnFunc(sender: UIButton){
         let timer = stopWatchTimer
-            remainTime = 0
+            remainTime = 60
             print("Reset / remainTime = \(remainTime)")
         timer?.invalidate()
         TimerView.stop()
         
-            //vezeri view 대신 datepicker
-            
-            //초기화면으로 돌아감
-            startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
-            startBtn.setTitle("Start", for: .normal)
+        //초기화면으로 돌아감
+        TimerView.removeFromSuperview()
+        startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
+        startBtn.configuration?.baseForegroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+        startBtn.setTitle("시작", for: .normal)
     }
     
     @objc func startBtnFunc(sender:UIButton){
@@ -139,12 +142,12 @@ extension TimerVC {
             stopWatchTimer = nil
             print("remainTime = \(remainTime)")
             
-            startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
-            startBtn.setTitle("Continue", for: .normal)
+            startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
+            startBtn.configuration?.baseForegroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+            startBtn.setTitle("재개", for: .normal)
         }
         else{
             //timer가 일시정지되었다면 Continue -> 일시정지
-            
             if(initTime == remainTime){
             self.view.addSubview(self.TimerView)
             NSLayoutConstraint.activate([
@@ -154,7 +157,6 @@ extension TimerVC {
                 TimerView.bottomAnchor.constraint(equalTo: DatePicker.bottomAnchor),])
         }
         
-       
             stopWatchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
                 self.remainTime -= Int(timer.timeInterval)
                 
@@ -164,22 +166,29 @@ extension TimerVC {
                                
                 self.TimerView.timeLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
                 self.TimerView.start(remainTime: remainTime, initTime: initTime)
-               
                 print("\(self.remainTime), \(hours)시간 \(minutes)분 \(seconds)초")
-
                 
                 //timer 종료
                     if self.remainTime == 0 {
                        timer.invalidate()
                         print("remainTime == 0")
                         TimerView.stop()
+                        TimerView.removeFromSuperview()
+                        TimerAlarmFunc()
                     }
                 }
-            startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1)
-            startBtn.setTitle("Stop", for: .normal)
+            startBtn.configuration?.baseBackgroundColor = #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)
+            startBtn.configuration?.baseForegroundColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
+            startBtn.setTitle("일시정지", for: .normal)
         }
     }
     
+    
+    func TimerAlarmFunc(){
+        //Timer 종료 Noti
+        
+        
+    }
 }
 
 extension TimerVC : UITableViewDelegate, UITableViewDataSource {
@@ -212,6 +221,5 @@ extension TimerVC : UITableViewDelegate, UITableViewDataSource {
         ])
         
     }
-    
     
 }

@@ -8,7 +8,7 @@
 import UIKit
 class AlarmCell : UITableViewCell{
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder: NSCoder) {

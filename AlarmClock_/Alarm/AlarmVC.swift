@@ -13,11 +13,12 @@ class AlarmVC: UIViewController {
     //DatePicker로 고른 시간 배열로 저장
     var tableview = UITableView(frame: .zero, style: .plain)
  
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
-        //self.navigationController?.navigationBar.barStyle = .black
-        //statusbar tint color 변경. viewdidload 전에 사용해야 함
-        
+       
         super.viewDidLoad()
         setTableView()
         setNavigationBar()
@@ -96,9 +97,9 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Alarm") as! AlarmCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Alarm")as! AlarmCell
         cell.accessoryView = UISwitch(frame: .zero)
-        cell.textLabel?.text = timeArray[indexPath.row]
+        cell.textLabbel?.text = timeArray[indexPath.row]
         cell.detailTextLabel?.text = "알람"
         //subtitle 문자 지정
         

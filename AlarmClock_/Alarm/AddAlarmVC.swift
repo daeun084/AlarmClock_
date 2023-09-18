@@ -14,17 +14,22 @@ protocol AlarmDelegate: AnyObject {
 class AddAlarmVC : UIViewController{
         var tableview = UITableView(frame: .zero, style: .insetGrouped)
         
-        var alarmtime : String = ""
+        var alarmtime : String = "오전 12:00"
        weak var delegate : AlarmDelegate?
         //Delegate를 위한 변수 생성 -> func 으로 data 넘기기 위함
         
-      
         let DatePicker = UIDatePicker()
-        
+        let dateFormat : DateFormatter = {
+            let format = DateFormatter()
+            format.timeStyle = .short
+            return format
+        }()
+
     
         func setDatePicker(){
             view.addSubview(DatePicker)
             DatePicker.timeZone = .autoupdatingCurrent
+            alarmtime = dateFormat.string(from: DatePicker.date)
             //현재 시간으로 업데이트
             DatePicker.datePickerMode = .time
             DatePicker.preferredDatePickerStyle = .wheels
@@ -42,8 +47,6 @@ class AddAlarmVC : UIViewController{
             
         }
         @objc func datePickFunc(_:UIDatePicker){
-         let dateFormat = DateFormatter()
-            dateFormat.timeStyle = .short
             alarmtime = dateFormat.string(from: DatePicker.date)
          //save 버튼 누르면 데이터 전송
         }
