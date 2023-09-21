@@ -20,11 +20,12 @@ class AlarmVC: UIViewController {
     override func viewDidLoad() {
        
         super.viewDidLoad()
-        setTableView()
         setNavigationBar()
         setTabBar()
         overrideUserInterfaceStyle = .dark
         //앱을 다크모드로 간주함
+        setTableView()
+
        
     }
 }
@@ -75,8 +76,9 @@ extension AlarmVC{
         let editVC = AddAlarmVC()
         editVC.delegate = self
         //EditVC 인스턴스 생성할 때 delegate 설정
+        editVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(editVC, animated: true)
-        //present(editVC, animated: true)
+        //present(editVC, animated: true, completion: nil)
     }
     
     func setTabBar(){
@@ -97,17 +99,20 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Alarm")as! AlarmCell
-        cell.accessoryView = UISwitch(frame: .zero)
-        cell.textLabbel?.text = timeArray[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Alarm") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "Alarm")
+
+        cell.textLabel?.text = timeArray[indexPath.row]
         cell.detailTextLabel?.text = "알람"
         //subtitle 문자 지정
         
         cell.textLabel?.font = UIFont.systemFont(ofSize: 45, weight: .thin)
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 20)
         
+        cell.accessoryView = UISwitch(frame: .zero)
+        
         return cell
     }
+    
     
     func tableView(_: UITableView, heightForRowAt: IndexPath) -> CGFloat{
         return 120
@@ -115,9 +120,9 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            UserDefaults.standard.set(timeArray, forKey: "timeArray")
             timeArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            UserDefaults.standard.set(timeArray, forKey: "timeArray")
         } else if editingStyle == .insert{
             
         }
@@ -136,20 +141,17 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
     
     func setTableView(){
         view.addSubview(tableview)
+        self.tableview.dataSource = self
+        self.tableview.delegate = self
+       tableview.register(UITableViewCell.self, forCellReuseIdentifier: "Alarm")
         
         tableview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tableview.topAnchor.constraint(equalTo: view.topAnchor),
             tableview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
            tableview.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-       
-        
-        self.tableview.dataSource = self
-        self.tableview.delegate = self
-        tableview.register(AlarmCell.self, forCellReuseIdentifier: "Alarm")
         
     }
     

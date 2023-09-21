@@ -27,7 +27,7 @@ class TabBarController : UITabBarController {
             items[2].title = "스톱워치"
             items[3].title = "타이머"
         }
-        
+        self.hidesBottomBarWhenPushed = true
         self.selectedIndex = 1
         self.tabBar.unselectedItemTintColor = .systemGray
         self.tabBar.tintColor = .orange

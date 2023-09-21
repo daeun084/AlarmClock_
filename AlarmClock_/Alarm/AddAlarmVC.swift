@@ -81,12 +81,15 @@ extension AddAlarmVC{
     }
     @objc func cancelAlarmEdit(_:UIBarButtonItem){
         navigationController?.popViewController(animated: true)
+        //self.presentingViewController?.dismiss(animated: true)
     }
     @objc func saveAlarm(_:UIBarButtonItem){
         self.delegate?.alarmDelegate(data: alarmtime)
         //delegate(AlarmDelegate)의 func 호출해 alarmtime을 넘김
         //메인 뷰에 데이터 넘김
         navigationController?.popViewController(animated: true)
+        //self.presentingViewController?.dismiss(animated: true)
+
     }
 }
 
