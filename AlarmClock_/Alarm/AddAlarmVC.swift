@@ -48,6 +48,7 @@ class AddAlarmVC : UIViewController{
         }
         @objc func datePickFunc(_:UIDatePicker){
             alarmtime = dateFormat.string(from: DatePicker.date)
+            print("addTime : \(alarmtime)")
          //save 버튼 누르면 데이터 전송
         }
     

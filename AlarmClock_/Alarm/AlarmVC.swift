@@ -9,24 +9,57 @@ import UIKit
 
 class AlarmVC: UIViewController {
     
+    var currentTime = Date()
+    
     var timeArray : [String] = []
     //DatePicker로 고른 시간 배열로 저장
     var tableview = UITableView(frame: .zero, style: .plain)
- 
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     override func viewDidLoad() {
-       
+        
         super.viewDidLoad()
         setNavigationBar()
         setTabBar()
         overrideUserInterfaceStyle = .dark
         //앱을 다크모드로 간주함
         setTableView()
-
-       
+        
+        DispatchQueue.global().async {
+            self.checkTime()
+            //timer사용해야 함
+        }
+    }
+    
+    
+    
+    //현재 시간과 비교해서 Alart 띄우기
+    func checkTime(){
+        //현재 시간 체크
+        currentTime = Date()
+        var DateFormatter = DateFormatter()
+      //  DateFormatter.dateFormat = "HH:mm"
+        DateFormatter.timeStyle = .short
+        let dateString = DateFormatter.string(for: currentTime)!
+        print(dateString)
+        
+        for i in timeArray{
+            print("현재 시간 : \(dateString), i : \(i)")
+            if (dateString == i){ //switch 유무 따져야 함
+                let alert = UIAlertController(title: "Alarm", message: "alarm", preferredStyle: .alert)
+                let allowAction = UIAlertAction(title: "Allow", style: .default){_ in
+                   //switch off
+                }
+                alert.addAction(allowAction)
+                self.present(alert, animated: true)
+                print("Alert Action")
+                
+            }
+        }
+        
     }
 }
 
@@ -34,6 +67,7 @@ extension AlarmVC : AlarmDelegate{
     
     func alarmDelegate(data: String) {
         timeArray.append(data)
+        print(data)
         self.tableview.reloadData()
     }
     //EditView에서 alarmtime을 전달 받음
