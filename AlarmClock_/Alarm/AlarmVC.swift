@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class AlarmVC: UIViewController {
     
@@ -20,7 +21,6 @@ class AlarmVC: UIViewController {
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         setNavigationBar()
         setTabBar()
@@ -28,12 +28,13 @@ class AlarmVC: UIViewController {
         //앱을 다크모드로 간주함
         setTableView()
         
-        DispatchQueue.global().async {
-            self.checkTime()
-            //timer사용해야 함
-        }
+        let timer = Timer(timeInterval: 10, target: self, selector: #selector(runCheckTime), userInfo: nil, repeats: true)
+                RunLoop.current.add(timer, forMode: .default)
     }
     
+    @objc func runCheckTime(){
+        checkTime()
+    }
     
     
     //현재 시간과 비교해서 Alart 띄우기
@@ -43,24 +44,46 @@ class AlarmVC: UIViewController {
         var DateFormatter = DateFormatter()
       //  DateFormatter.dateFormat = "HH:mm"
         DateFormatter.timeStyle = .short
-        let dateString = DateFormatter.string(for: currentTime)!
-        print(dateString)
+        let dateString = DateFormatter.string(for: currentTime + 1)!
+            //Date()가 현재 시간보다 1분 느려서 dateString =+ 1
         
         for i in timeArray{
             print("현재 시간 : \(dateString), i : \(i)")
-            if (dateString == i){ //switch 유무 따져야 함
-                let alert = UIAlertController(title: "Alarm", message: "alarm", preferredStyle: .alert)
-                let allowAction = UIAlertAction(title: "Allow", style: .default){_ in
-                   //switch off
+            if (dateString == i){
+                if let cell = tableview.visibleCells.first(where: { $0.textLabel?.text == i }) as? UITableViewCell {
+                        if let accessorySwitch = cell.accessoryView as? UISwitch {
+                            // 스위치에 접근
+                            print("Switch Value: \(accessorySwitch.isOn)")
+                            if(accessorySwitch.isOn){
+                                scheduleNotification(at: currentTime)
+                            }
+                    }
                 }
-                alert.addAction(allowAction)
-                self.present(alert, animated: true)
-                print("Alert Action")
-                
             }
         }
-        
     }
+    
+    func scheduleNotification(at time: Date) {
+        print("schedulNotif")
+        let content = UNMutableNotificationContent()
+        content.title = "Alarm"
+        content.body = "Alarm is ringing"
+
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: time)
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+
+        let request = UNNotificationRequest(identifier: "alarm", content: content, trigger: trigger)
+
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error) in
+            if let error = error {
+                print("Error scheduling notification: \(error)")
+            }
+        }
+    }
+
 }
 
 extension AlarmVC : AlarmDelegate{
@@ -68,6 +91,7 @@ extension AlarmVC : AlarmDelegate{
     func alarmDelegate(data: String) {
         timeArray.append(data)
         print(data)
+        timeArray.sort() // timeArray를 정렬
         self.tableview.reloadData()
     }
     //EditView에서 alarmtime을 전달 받음
@@ -158,9 +182,7 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
             timeArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert{
-            
         }
-        
     }
     
     
@@ -177,7 +199,7 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
         view.addSubview(tableview)
         self.tableview.dataSource = self
         self.tableview.delegate = self
-       tableview.register(UITableViewCell.self, forCellReuseIdentifier: "Alarm")
+       //tableview.register(UITableViewCell.self, forCellReuseIdentifier: "Alarm")
         
         tableview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
