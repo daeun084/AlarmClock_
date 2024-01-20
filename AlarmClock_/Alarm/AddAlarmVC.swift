@@ -11,7 +11,7 @@ protocol AlarmDelegate: AnyObject {
     func alarmDelegate(data: String)
 }
 
-class AddAlarmVC : UIViewController{
+class AddAlarmVC : BaseViewController{
     // MARK: UI
         var tableview = UITableView(frame: .zero, style: .insetGrouped)
         
@@ -29,8 +29,6 @@ class AddAlarmVC : UIViewController{
     // MARK: LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigation()
-        overrideUserInterfaceStyle = .dark
         setDatePicker()
         setTableView()
     }
@@ -63,11 +61,7 @@ class AddAlarmVC : UIViewController{
     }
     
     // MARK: NAVIGATION
-    func setNavigation(){
-        let appearance = UINavigationBarAppearance()
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 20)]
-        navigationController!.navigationBar.prefersLargeTitles = false
-        
+    override func setNavigationBar(){
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAlarmEdit(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveAlarm(_:)))
         navigationItem.rightBarButtonItem?.tintColor = .orange

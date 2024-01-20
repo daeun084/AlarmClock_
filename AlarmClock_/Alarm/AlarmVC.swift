@@ -8,25 +8,18 @@
 import UIKit
 import UserNotifications
 
-class AlarmVC: UIViewController {
+class AlarmVC: BaseViewController {
     
+    // MARK: UI
     var currentTime = Date()
     
     var timeArray : [String] = []
     //DatePicker로 고른 시간 배열로 저장
     var tableview = UITableView(frame: .zero, style: .plain)
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     // MARK: LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
-        setTabBar()
-        overrideUserInterfaceStyle = .dark
-        //앱을 다크모드로 간주함
         setTableView()
         setTimer()
     }
@@ -45,7 +38,7 @@ class AlarmVC: UIViewController {
     func checkTime(){
         //현재 시간 체크
         currentTime = Date()
-        var DateFormatter = DateFormatter()
+        let DateFormatter = DateFormatter()
       //  DateFormatter.dateFormat = "HH:mm"
         DateFormatter.timeStyle = .short
         let dateString = DateFormatter.string(for: currentTime + 1)!
@@ -88,6 +81,30 @@ class AlarmVC: UIViewController {
         }
     }
 
+// MARK: NAVIGATIONBAR
+    override func setNavigationBar(){
+        navigationItem.title = "알람"
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(LeftBtnPressed(sender:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(RightBtnPressed(_:)))
+        navigationItem.rightBarButtonItem?.tintColor = .orange
+        navigationItem.leftBarButtonItem?.tintColor = .orange
+    }
+    
+    @objc func LeftBtnPressed(sender: UIBarButtonItem){
+        let shouldBeEdited = !tableview.isEditing
+           tableview.setEditing(shouldBeEdited, animated: true)
+          sender.isSelected = shouldBeEdited
+    }
+    //눌렀을 때 editing 가능하게 함
+    
+    @objc func RightBtnPressed(_:UIBarButtonItem){
+        let editVC = AddAlarmVC()
+        editVC.delegate = self
+        //EditVC 인스턴스 생성할 때 delegate 설정
+        editVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(editVC, animated: true)
+    }
 }
 
 // MARK: DELEGATE
@@ -101,57 +118,6 @@ extension AlarmVC : AlarmDelegate{
     }
     //EditView에서 alarmtime을 전달 받음
     //프로토콜 채택해야 함
-}
-
-// MARK: NAVIGATIONBAR
-extension AlarmVC{
-    func setNavigationBar(){
-        
-        let navigationBar = navigationController!.navigationBar
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundEffect = UIBlurEffect(style: .dark)
-        //tableview의 topAnchor을 view.topAnchor으로 설정해야 블러 효과가 나타남
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 20)]
-       // navigationBar.prefersLargeTitles = true
-        
-        navigationItem.title = "알람"
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(LeftBtnPressed(sender:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(RightBtnPressed(_:)))
-        navigationItem.rightBarButtonItem?.tintColor = .orange
-        navigationItem.leftBarButtonItem?.tintColor = .orange
-        
-        
-        navigationBar.standardAppearance = appearance
-        navigationBar.compactAppearance = appearance
-        navigationBar.scrollEdgeAppearance = appearance
-    }
-    
-    @objc func LeftBtnPressed(sender: UIBarButtonItem){
-        let shouldBeEdited = !tableview.isEditing
-           tableview.setEditing(shouldBeEdited, animated: true)
-          sender.isSelected = shouldBeEdited
-    }
-    //눌렀을 때 editing 가능하게 함
-    
-    
-    @objc func RightBtnPressed(_:UIBarButtonItem){
-        let editVC = AddAlarmVC()
-        editVC.delegate = self
-        //EditVC 인스턴스 생성할 때 delegate 설정
-        editVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(editVC, animated: true)
-    }
-    
-    func setTabBar(){
-        let tabBar = tabBarController?.tabBar
-        
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.backgroundEffect = UIBlurEffect(style: .dark)
-        
-        tabBar?.standardAppearance = tabBarAppearance
-        tabBar?.scrollEdgeAppearance = tabBarAppearance
-    }
 }
 
 // MARK: TABLEVIEW

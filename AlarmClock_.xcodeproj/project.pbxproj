@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26A0EF382B5BF105003E11D6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A0EF372B5BF105003E11D6 /* BaseViewController.swift */; };
 		C932481A2A5181E800908D6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93248192A5181E800908D6B /* AppDelegate.swift */; };
 		C932481C2A5181E800908D6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932481B2A5181E800908D6B /* SceneDelegate.swift */; };
 		C932481E2A5181E900908D6B /* AlarmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C932481D2A5181E900908D6B /* AlarmVC.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26A0EF372B5BF105003E11D6 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C93248162A5181E800908D6B /* AlarmClock_.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmClock_.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C93248192A5181E800908D6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C932481B2A5181E800908D6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26A0EF362B5BF0F2003E11D6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				26A0EF372B5BF105003E11D6 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		C932480D2A5181E800908D6B = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +136,7 @@
 				C9C3CB4D2AAAD7C9002FD6DE /* StopWatch */,
 				C9C3CB4E2AAAD7E4002FD6DE /* Timer */,
 				C93248542A51A39300908D6B /* Cell */,
+				26A0EF362B5BF0F2003E11D6 /* Base */,
 				C932481B2A5181E800908D6B /* SceneDelegate.swift */,
 				C93248192A5181E800908D6B /* AppDelegate.swift */,
 				C93248252A5181EA00908D6B /* Assets.xcassets */,
@@ -335,6 +346,7 @@
 				C9C3CB472AAAD621002FD6DE /* TimerVC.swift in Sources */,
 				C93248242A5181E900908D6B /* AlarmClock_.xcdatamodeld in Sources */,
 				C932481E2A5181E900908D6B /* AlarmVC.swift in Sources */,
+				26A0EF382B5BF105003E11D6 /* BaseViewController.swift in Sources */,
 				C97E18A92AA95D0E006AED90 /* SetRepeatVC.swift in Sources */,
 				C9C074B62AB011680037A416 /* EditAlarmVC.swift in Sources */,
 				C9C3CB432AAAD577002FD6DE /* TabBarController.swift in Sources */,

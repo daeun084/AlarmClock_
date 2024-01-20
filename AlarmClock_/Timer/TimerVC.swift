@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class TimerVC : UIViewController {
+class TimerVC : BaseViewController {
     
     // MARK: UI
     var stopWatchTimer : Timer?
@@ -52,17 +52,12 @@ class TimerVC : UIViewController {
     // MARK: LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        overrideUserInterfaceStyle = .dark
         
-        makeSubView()
-        makeConstraint()
         setTableView()
     }
-}
-
-extension TimerVC {
+    
     // MARK: CONFIGURE
-    func makeSubView(){
+    override func makeSubViews(){
         view.addSubview(DatePicker)
         view.addSubview(cancelBtn)
         view.addSubview(startBtn)
@@ -73,7 +68,7 @@ extension TimerVC {
     }
     
     // MARK: LAYOUT
-    func makeConstraint(){
+    override func makeConstraints(){
         DatePicker.translatesAutoresizingMaskIntoConstraints = false
         cancelBtn.translatesAutoresizingMaskIntoConstraints = false
         startBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -174,7 +169,6 @@ extension TimerVC {
     
     func TimerAlarmFunc(){
         //Timer 종료 Noti
-        
         
     }
 }

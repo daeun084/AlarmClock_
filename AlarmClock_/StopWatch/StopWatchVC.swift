@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class StopWatchVC : UIViewController {
+class StopWatchVC : BaseViewController {
     
      // MARK: UI
     var timeLabel : UILabel = {
@@ -49,19 +49,13 @@ class StopWatchVC : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        overrideUserInterfaceStyle = .dark
-        makeSubView()
-        makeConstraint()
-        setTableView()
         
+        setTableView()
         timeLabel.text = "00:00:00"
     }
     
-}
-
-extension StopWatchVC {
      // MARK: CONFIGURE
-    func makeSubView(){
+    override func makeSubViews(){
         view.addSubview(timeLabel)
         view.addSubview(labBtn)
         view.addSubview(startBtn)
@@ -71,7 +65,7 @@ extension StopWatchVC {
     }
     
     // MARK: LAYOUT
-    func makeConstraint(){
+    override func makeConstraints(){
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         labBtn.translatesAutoresizingMaskIntoConstraints = false
         startBtn.translatesAutoresizingMaskIntoConstraints = false

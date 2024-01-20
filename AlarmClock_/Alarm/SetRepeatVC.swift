@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class SetRepeatVC : UIViewController {
+class SetRepeatVC : BaseViewController {
     
     // MARK: UI
     let tableView : UITableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -14,13 +14,11 @@ class SetRepeatVC : UIViewController {
     //MARK: LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        overrideUserInterfaceStyle = .dark
-        setNavigationBar()
         setTableView()
     }
     
     // MARK: NAVIGATION
-    func setNavigationBar(){
+    override func setNavigationBar(){
         self.title = "반복"
         let backBtn = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelFunc(_:)))
         backBtn.title = "뒤로"
