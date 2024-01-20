@@ -8,17 +8,12 @@
 import UIKit
 class TimerVC : UIViewController {
     
-    
+    // MARK: UI
     var stopWatchTimer : Timer?
     var tableView = UITableView(frame: .zero, style: .insetGrouped)
     var remainTime : Int = 60
     var initTime = 60
-    
-    let TimerView : TimerUIView = {
-       let view = TimerUIView()
-        return view
-    }()
-    
+    let TimerView : TimerUIView = TimerUIView()
     
     let DatePicker : UIDatePicker = {
         let picker = UIDatePicker()
@@ -53,29 +48,31 @@ class TimerVC : UIViewController {
         btn.configuration = config
         return btn
     }()
-
     
-    
+    // MARK: LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
         
         makeSubView()
         makeConstraint()
-        makeAddTarget()
         setTableView()
     }
-    
 }
 
 extension TimerVC {
+    // MARK: CONFIGURE
     func makeSubView(){
         view.addSubview(DatePicker)
         view.addSubview(cancelBtn)
         view.addSubview(startBtn)
         
+        DatePicker.addTarget(self, action: #selector(datePickFunc(_:)), for: .valueChanged)
+        cancelBtn.addTarget(self, action: #selector(cancelBtnFunc(sender:)), for: .touchUpInside)
+        startBtn.addTarget(self, action: #selector(startBtnFunc(sender:)), for: .touchUpInside)
     }
     
+    // MARK: LAYOUT
     func makeConstraint(){
         DatePicker.translatesAutoresizingMaskIntoConstraints = false
         cancelBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -98,16 +95,9 @@ extension TimerVC {
             startBtn.heightAnchor.constraint(equalTo: cancelBtn.heightAnchor)
             
         ])
-        
     }
     
-    func makeAddTarget(){
-        DatePicker.addTarget(self, action: #selector(datePickFunc(_:)), for: .valueChanged)
-        cancelBtn.addTarget(self, action: #selector(cancelBtnFunc(sender:)), for: .touchUpInside)
-        startBtn.addTarget(self, action: #selector(startBtnFunc(sender:)), for: .touchUpInside)
-        
-    }
-    
+    // MARK: EVENT
     @objc func datePickFunc(_: UIDatePicker) {
         let dateFormat = DateFormatter()
            dateFormat.timeStyle = .short
@@ -133,7 +123,6 @@ extension TimerVC {
     }
     
     @objc func startBtnFunc(sender:UIButton){
-     
         //timer가 running 중이라면 일시정지 -> 재개
         if let timer = stopWatchTimer {
             
@@ -183,14 +172,13 @@ extension TimerVC {
         }
     }
     
-    
     func TimerAlarmFunc(){
         //Timer 종료 Noti
         
         
     }
 }
-
+    // MARK: TABLEVIEW
 extension TimerVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -205,12 +193,10 @@ extension TimerVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func setTableView(){
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TimerCell")
 
-        
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -219,7 +205,5 @@ extension TimerVC : UITableViewDelegate, UITableViewDataSource {
             tableView.topAnchor.constraint(equalTo: cancelBtn.bottomAnchor, constant: 50),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
     }
-    
 }

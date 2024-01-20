@@ -285,6 +285,9 @@
 				Base,
 			);
 			mainGroup = C932480D2A5181E800908D6B;
+			packageReferences = (
+				26A0EF352B5BEA8B003E11D6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = C93248172A5181E800908D6B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -670,6 +673,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		26A0EF352B5BEA8B003E11D6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		C93248222A5181E900908D6B /* AlarmClock_.xcdatamodeld */ = {

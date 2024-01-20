@@ -7,7 +7,8 @@
 
 import UIKit
 class StopWatchVC : UIViewController {
-        
+    
+     // MARK: UI
     var timeLabel : UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
@@ -52,7 +53,6 @@ class StopWatchVC : UIViewController {
         makeSubView()
         makeConstraint()
         setTableView()
-        makeAddTarget()
         
         timeLabel.text = "00:00:00"
     }
@@ -60,12 +60,17 @@ class StopWatchVC : UIViewController {
 }
 
 extension StopWatchVC {
+     // MARK: CONFIGURE
     func makeSubView(){
         view.addSubview(timeLabel)
         view.addSubview(labBtn)
         view.addSubview(startBtn)
+        
+        startBtn.addTarget(self, action: #selector(setStartBtnFunc(sender:)), for: .touchUpInside)
+        labBtn.addTarget(self, action: #selector(setlabBtnFunc(sender: )), for: .touchUpInside)
     }
     
+    // MARK: LAYOUT
     func makeConstraint(){
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         labBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -87,11 +92,6 @@ extension StopWatchVC {
             startBtn.heightAnchor.constraint(equalTo: labBtn.heightAnchor)
         
         ])
-    }
-    
-    func makeAddTarget(){
-        startBtn.addTarget(self, action: #selector(setStartBtnFunc(sender:)), for: .touchUpInside)
-        labBtn.addTarget(self, action: #selector(setlabBtnFunc(sender: )), for: .touchUpInside)
     }
     
     @objc func setStartBtnFunc(sender : UIButton){
@@ -120,8 +120,6 @@ extension StopWatchVC {
             sender.setTitle("Stop", for: .normal)
             labBtn.setTitle("Lab", for: .normal)
     }
-        
-    
     }
     
     @objc func setlabBtnFunc(sender : UIButton) {
@@ -130,7 +128,6 @@ extension StopWatchVC {
             //Lab
            labArray.append(elapsedTime)
             print(labArray[labArray.count - 1])
-            
         }
         else{
             //Timer가 running중이 아니라면
@@ -140,13 +137,11 @@ extension StopWatchVC {
             labBtn.setTitle("Lab", for: .normal)
             labArray = []
             print(labArray)
-            
         }
         tableView.reloadData()
-
     }
 }
-
+    // MARK: TABLEVIEW
 extension StopWatchVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return labArray.count
@@ -176,18 +171,14 @@ extension StopWatchVC : UITableViewDelegate, UITableViewDataSource {
             return label
         }()
         
-        cell.accessoryView = nil
         //기존 accessoryView를 지우고 contentView에 Label 추가
+        cell.accessoryView = nil
         cell.contentView.addSubview(accessoryLabel)
-        
         
         NSLayoutConstraint.activate([
               accessoryLabel.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
               accessoryLabel.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -20), // 원하는 위치로 조절
           ])
-        
-        
-        
         cell.textLabel?.text = "Lab \(indexPath.row + 1)"
         cell.tintColor = .white
         return cell
@@ -212,9 +203,5 @@ extension StopWatchVC : UITableViewDelegate, UITableViewDataSource {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-
-        
     }
-    
-    
 }

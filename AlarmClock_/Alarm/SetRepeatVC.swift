@@ -8,16 +8,32 @@
 import UIKit
 class SetRepeatVC : UIViewController {
     
+    // MARK: UI
     let tableView : UITableView = UITableView(frame: .zero, style: .insetGrouped)
+    
+    //MARK: LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
         setNavigationBar()
         setTableView()
-
+    }
+    
+    // MARK: NAVIGATION
+    func setNavigationBar(){
+        self.title = "반복"
+        let backBtn = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelFunc(_:)))
+        backBtn.title = "뒤로"
+        backBtn.tintColor = .orange
+        navigationItem.backBarButtonItem = backBtn
+    }
+    
+    @objc func cancelFunc(_: UIBarButtonItem){
+        navigationController?.popViewController(animated: true)
     }
 }
 
+ // MARK: TABLEVIEW
 extension SetRepeatVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 7
@@ -72,23 +88,7 @@ extension SetRepeatVC : UITableViewDelegate, UITableViewDataSource {
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.heightAnchor.constraint(equalToConstant: 50*8)
-            
         ])
-        
     }
-    
 }
 
-extension SetRepeatVC {
-    func setNavigationBar(){
-        self.title = "반복"
-        let backBtn = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelFunc(_:)))
-        backBtn.title = "뒤로"
-        backBtn.tintColor = .orange
-        navigationItem.backBarButtonItem = backBtn
-    }
-    
-    @objc func cancelFunc(_: UIBarButtonItem){
-        navigationController?.popViewController(animated: true)
-    }
-}

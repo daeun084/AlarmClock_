@@ -8,6 +8,7 @@
 import UIKit
 class TimerUIView : UIView {
     
+    // MARK: UI
     var timeLabel : UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
@@ -16,7 +17,6 @@ class TimerUIView : UIView {
         label.text = "00:00:00"
         return label
     }()
-
     
     private let backgroundLayer = CAShapeLayer()
     private let progressLayer = CAShapeLayer()
@@ -33,9 +33,8 @@ class TimerUIView : UIView {
         clockwise: true
       )
     }
-
     
-    
+    // MARK: LIFECYCLE
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .black
@@ -56,6 +55,7 @@ class TimerUIView : UIView {
 }
 
 extension TimerUIView {
+    // MARK: CONFIGURE
     func makeSubView(){
         self.addSubview(timeLabel)
         self.layer.addSublayer(self.backgroundLayer)
@@ -63,13 +63,13 @@ extension TimerUIView {
 
     }
     
+    // MARK: LAYOUT
     func makeConstraint(){
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             timeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             timeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            
         ])
     }
     
@@ -111,7 +111,6 @@ extension TimerUIView {
             let timeSincePause = progressLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
             progressLayer.beginTime = timeSincePause
         }
-        
     }
     
     func pauseFunc(){
@@ -126,6 +125,5 @@ extension TimerUIView {
         print("beiz stop")
         self.progressLayer.removeAnimation(forKey: self.animationName)
         self.timeLabel.text = "00:00:00"
-
     }
 }

@@ -12,6 +12,7 @@ protocol AlarmDelegate: AnyObject {
 }
 
 class AddAlarmVC : UIViewController{
+    // MARK: UI
         var tableview = UITableView(frame: .zero, style: .insetGrouped)
         
         var alarmtime : String = "오전 12:00"
@@ -24,76 +25,67 @@ class AddAlarmVC : UIViewController{
             format.timeStyle = .short
             return format
         }()
-
     
-        func setDatePicker(){
-            view.addSubview(DatePicker)
-            DatePicker.timeZone = .autoupdatingCurrent
-            alarmtime = dateFormat.string(from: DatePicker.date)
-            //현재 시간으로 업데이트
-            DatePicker.datePickerMode = .time
-            DatePicker.preferredDatePickerStyle = .wheels
-            
-            DatePicker.locale = Locale(identifier: "ko_KR")
-            //속성을 영어에서 한글로 변경
-            DatePicker.addTarget(self, action: #selector(datePickFunc(_:)), for: .valueChanged)
-            
-            
-            DatePicker.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                DatePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-                DatePicker.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
-        ])
-            
-        }
-        @objc func datePickFunc(_:UIDatePicker){
-            alarmtime = dateFormat.string(from: DatePicker.date)
-            print("addTime : \(alarmtime)")
-         //save 버튼 누르면 데이터 전송
-        }
-    
-    
+    // MARK: LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
         overrideUserInterfaceStyle = .dark
         setDatePicker()
         setTableView()
+    }
+    
+    // MARK: DATEPICKER
+    func setDatePicker(){
+        view.addSubview(DatePicker)
+        DatePicker.timeZone = .autoupdatingCurrent
+        alarmtime = dateFormat.string(from: DatePicker.date)
+        //현재 시간으로 업데이트
+        DatePicker.datePickerMode = .time
+        DatePicker.preferredDatePickerStyle = .wheels
+        
+        DatePicker.locale = Locale(identifier: "ko_KR")
+        //속성을 영어에서 한글로 변경
+        DatePicker.addTarget(self, action: #selector(datePickFunc(_:)), for: .valueChanged)
+        
+        
+        DatePicker.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            DatePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            DatePicker.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+    ])
         
     }
-
-}
-
-extension AddAlarmVC{
+    @objc func datePickFunc(_:UIDatePicker){
+        alarmtime = dateFormat.string(from: DatePicker.date)
+        print("addTime : \(alarmtime)")
+     //save 버튼 누르면 데이터 전송
+    }
     
+    // MARK: NAVIGATION
     func setNavigation(){
         let appearance = UINavigationBarAppearance()
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 20)]
         navigationController!.navigationBar.prefersLargeTitles = false
-        
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAlarmEdit(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveAlarm(_:)))
         navigationItem.rightBarButtonItem?.tintColor = .orange
         navigationItem.leftBarButtonItem!.tintColor = .orange
         navigationItem.title = "알람 추가"
-        
-      
     }
     @objc func cancelAlarmEdit(_:UIBarButtonItem){
         navigationController?.popViewController(animated: true)
-        //self.presentingViewController?.dismiss(animated: true)
     }
     @objc func saveAlarm(_:UIBarButtonItem){
         self.delegate?.alarmDelegate(data: alarmtime)
         //delegate(AlarmDelegate)의 func 호출해 alarmtime을 넘김
         //메인 뷰에 데이터 넘김
         navigationController?.popViewController(animated: true)
-        //self.presentingViewController?.dismiss(animated: true)
-
     }
 }
 
+// MARK: TABLEVIEW
 extension AddAlarmVC : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4

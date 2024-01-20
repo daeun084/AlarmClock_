@@ -20,6 +20,7 @@ class AlarmVC: UIViewController {
         return .lightContent
     }
     
+    // MARK: LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
@@ -27,15 +28,18 @@ class AlarmVC: UIViewController {
         overrideUserInterfaceStyle = .dark
         //앱을 다크모드로 간주함
         setTableView()
-        
+        setTimer()
+    }
+    
+    // MARK: TIMER
+    func setTimer(){
         let timer = Timer(timeInterval: 10, target: self, selector: #selector(runCheckTime), userInfo: nil, repeats: true)
-                RunLoop.current.add(timer, forMode: .default)
+        RunLoop.current.add(timer, forMode: .default)
     }
     
     @objc func runCheckTime(){
         checkTime()
     }
-    
     
     //현재 시간과 비교해서 Alart 띄우기
     func checkTime(){
@@ -86,6 +90,7 @@ class AlarmVC: UIViewController {
 
 }
 
+// MARK: DELEGATE
 extension AlarmVC : AlarmDelegate{
     
     func alarmDelegate(data: String) {
@@ -98,7 +103,7 @@ extension AlarmVC : AlarmDelegate{
     //프로토콜 채택해야 함
 }
 
-
+// MARK: NAVIGATIONBAR
 extension AlarmVC{
     func setNavigationBar(){
         
@@ -136,7 +141,6 @@ extension AlarmVC{
         //EditVC 인스턴스 생성할 때 delegate 설정
         editVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(editVC, animated: true)
-        //present(editVC, animated: true, completion: nil)
     }
     
     func setTabBar(){
@@ -150,7 +154,7 @@ extension AlarmVC{
     }
 }
 
-
+// MARK: TABLEVIEW
 extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timeArray.count
@@ -161,16 +165,13 @@ extension AlarmVC : UITableViewDelegate, UITableViewDataSource{
 
         cell.textLabel?.text = timeArray[indexPath.row]
         cell.detailTextLabel?.text = "알람"
-        //subtitle 문자 지정
         
         cell.textLabel?.font = UIFont.systemFont(ofSize: 45, weight: .thin)
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 20)
         
         cell.accessoryView = UISwitch(frame: .zero)
-        
         return cell
     }
-    
     
     func tableView(_: UITableView, heightForRowAt: IndexPath) -> CGFloat{
         return 120
